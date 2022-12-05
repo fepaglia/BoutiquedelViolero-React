@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 import { Link } from "react-router-dom";
 import "./Item.css"
 
-function Item({ id, title , price, pictureUrl }) {
+function Item({ id, title , price, pictureUrl, description }) {
   return (
 
     <Card style={{ width: '18rem' }}>
@@ -14,7 +14,7 @@ function Item({ id, title , price, pictureUrl }) {
           <span>{price} u$s</span> 
         </Card.Text>
 
-        <Button as={Link}  to={`/item/${id}`} variant="primary">
+        <Button as={Link} to={`/item/${id}`} variant="primary">
 
           Ver detalles
 

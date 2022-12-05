@@ -1,3 +1,11 @@
 .card {
     margin: 15px;
 }
+
+.card-body {
+    display: flex;
+    flex-flow: column nowrap;
+
+    justify-content: space-between;
+    align-items: stretch;
+}

@@ -4,7 +4,8 @@ import { products } from "../utility/data";
 import { customFetch } from "../utility/customFetch";
 import { useParams } from "react-router-dom";
 import "./ItemListContainer.css"
-const ItemListContainer = (props) =>{
+
+const ItemListContainer = () =>{
     const [info, setInfo] = useState([]);
     const { id } = useParams()
 
