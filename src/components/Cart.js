@@ -49,21 +49,24 @@ const Cart = () =>{
             .catch(err =>console.log(err));
 }
     return(
-        <>
-            <div>
-            <h2>Carrito</h2>
-            <button onClick={()=> {ctx.clear()}}>Limpiar todo</button> 
-
-            <Button as={Link} to={"/"}>Seguir Comprando</Button>
-            </div>
-
-            <div className="cartContainer d-flex justify-content-around">
+        <>  
+            <div className="d-flex justify-content-center">
                 <div>
+                <h2>Carrito</h2>
+                <button onClick={()=> {ctx.clear()}}>Limpiar todo</button> 
+
+                <Button as={Link} to={"/"}>Seguir Comprando</Button>
+                </div>
+            </div>
+            <div >
+                <div>
+                    
                     <ul>
                         {
                         ctx.cartList.length === 0
                         ? <p>ESta Vacio</p>
-                        : ctx.cartList.map( item => <li key={item.idItem}>{item.nameItem} - unidades: {item.qtyItem} x u$s {item.priceItem} = Subtotal: {ctx.calcTotalPerItem(item.idItem)} <button onClick={() => ctx.removeItem(item.idItem)}>Remover</button></li>)
+                        : ctx.cartList.map( item => 
+                        <li key={item.idItem}>{item.nameItem} - unidades: {item.qtyItem} x u$s {item.priceItem} = Subtotal: {ctx.calcTotalPerItem(item.idItem)} <button onClick={() => ctx.removeItem(item.idItem)}>Remover</button></li>)
                         }
                     </ul>
                 </div>
@@ -83,7 +86,7 @@ const Cart = () =>{
                                     <td>{ctx.calcTotal()} u$s</td>
                                 </tr>
 
-                                <tr>
+                                <tr >
                                     <td><Button onClick={() => {createOrder()}}>Realizar Pedido</Button></td>
                                 </tr>
 
