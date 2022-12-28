@@ -40,16 +40,25 @@ const CartContextProvider = ( {children} ) => {
         setCartList([]);
     };
 
-    
+    //Calculo del subtotal de cada articulo:
+    const calcTotalPerItem = (idItem) => {
+        let index = cartList.map(item => item.idItem).indexOf(idItem);
+        return cartList[index].priceItem * cartList[index].qtyItem;
+    };
+    // Calculo total de la compra:
+    const calcTotal = () => {
+        let totalPerItem = cartList.map(item => calcTotalPerItem(item.idItem));
+        return totalPerItem.reduce((previousValue, currentValue) => previousValue + currentValue);
+    };
 
     const calcItemsQty = () => {
         let cantidad = 0
         cartList.forEach((item) => cantidad = cantidad + item.qtyItem)
         return cantidad;
-    }
+    };
 
     return(
-        <CartContext.Provider value={{cartList, addItem, removeItem, clear, calcItemsQty}}>
+        <CartContext.Provider value={{cartList, addItem, removeItem, clear, calcItemsQty, calcTotalPerItem, calcTotal }}>
             { children }
         </CartContext.Provider>
 

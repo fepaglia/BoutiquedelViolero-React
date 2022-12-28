@@ -5,6 +5,7 @@ import ItemCount from './ItemCount';
 import { useState, useContext } from "react";
 import { CartContext } from "./CartContext";
 import Button from 'react-bootstrap/Button';
+import { Link } from "react-router-dom";
 
 const ItemDetail = ({ data }) => {
     const [itemCount, setItemCount] = useState(0);
@@ -37,7 +38,7 @@ const ItemDetail = ({ data }) => {
                     {
                         itemCount === 0
                         ? <ItemCount stock={data.stock} initial={itemCount} onAdd={onAdd} />
-                        : <Button>CheckOut</Button>  
+                        : <Button as={Link} to="/cart">CheckOut</Button>  
                     }
                 </div>
             </Card>
