@@ -1,8 +1,7 @@
 import ItemList from "./ItemList";
 import { useState, useEffect } from "react";
-import { products } from "../utility/data";
-import { customFetch } from "../utility/customFetch";
 import { useParams } from "react-router-dom";
+import { fetchFromFirestore } from "../utility/firestoreFetch";
 import "./ItemListContainer.css"
 
 const ItemListContainer = () =>{
@@ -10,24 +9,21 @@ const ItemListContainer = () =>{
     const { id } = useParams()
 
     useEffect(() =>{
+        fetchFromFirestore(id)
+            .then(res => setInfo(res))
+            .catch(err => console.log(err));
+    }, [id]);
 
-        if (id) {
-            customFetch(2000, products.filter(product => product.category === id) )
-            .then(response => setInfo(response))
-            .catch(error => console.log(error))
-        } else {
-            customFetch(2000, products)
-            .then(response => setInfo(response))
-            .catch(error => console.log(error))
-        }
-    }, [id])
-
+    useEffect(() =>{
+        return(()=>{
+            setInfo([]);
+        })
+    },[id]);
 
     return(
         <main>
              <ItemList data={info}/>
         </main>
-       
     )
 };
 

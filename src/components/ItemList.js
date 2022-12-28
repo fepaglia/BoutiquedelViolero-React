@@ -1,10 +1,11 @@
-
+import Loading from "../utility/Loading";
 import Item from "./Item";
 
-const ItemList = (props) => {
+const ItemList = ({ data }) => {
     return(
-        <>{
-            props.data.map(product => 
+        <>{     //Ternario, mientras carga muestra el Spinner
+            data.length > 0 ?
+            data.map(product => 
             <Item 
             key={product.id}
             id= {product.id}
@@ -12,9 +13,9 @@ const ItemList = (props) => {
             title={product.title}
             description={product.description}
             price={product.price}
-            />)
-
-        }</>
+            />) : <Loading />
+        }
+        </>
     )
 };
 
