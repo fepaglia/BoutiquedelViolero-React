@@ -2,10 +2,11 @@ import ItemList from "./ItemList";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { fetchFromFirestore } from "../utility/firestoreFetch";
-import "./ItemListContainer.css"
+import styles from "./ItemListContainer.module.css"
 
 const ItemListContainer = () =>{
     const [info, setInfo] = useState([]);
+    
     const { id } = useParams()
 
     useEffect(() =>{
@@ -21,7 +22,7 @@ const ItemListContainer = () =>{
     },[id]);
 
     return(
-        <main>
+        <main className={styles.main}>
              <ItemList data={info}/>
         </main>
     )

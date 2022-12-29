@@ -1,16 +1,16 @@
-button {
+.cartButton {
     border: 1px solid black;
     border-radius: 50px;
     padding: 10px 20px;
 }
-button:hover {
+.cartButton:hover {
     background-color: grey;
     cursor: pointer;
   
 }
 
-@media (max-width: 1200px) {
-    button {
+@media (max-width: 980px) {
+    .cartButton {
         border-radius: 10px;
         border: none;
         padding:8px 12px 8px 12px;

@@ -15,11 +15,12 @@ const CartContextProvider = ( {children} ) => {
                 ...cartList,
                 {
                     idItem: item.id,
+                    picItem: item.pictureUrl,
                     nameItem: item.title,
                     priceItem: item.price,
                     qtyItem: qty
                 }
-        ]);            
+            ]);            
         }
         else {
             cartItem.qtyItem += qty;
@@ -50,10 +51,10 @@ const CartContextProvider = ( {children} ) => {
         let totalPerItem = cartList.map(item => calcTotalPerItem(item.idItem));
         return totalPerItem.reduce((previousValue, currentValue) => previousValue + currentValue);
     };
-
+    //Calculo para que no se repitan los items
     const calcItemsQty = () => {
-        let cantidad = 0
-        cartList.forEach((item) => cantidad = cantidad + item.qtyItem)
+        let cantidad = 0;
+        cartList.forEach((item) => cantidad = cantidad + item.qtyItem);
         return cantidad;
     };
 

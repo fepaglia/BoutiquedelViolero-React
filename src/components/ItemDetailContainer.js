@@ -4,7 +4,9 @@ import ItemDetail from "./ItemDetail";
 import { fetchOneFromFirestore } from "../utility/firestoreFetch";
 
 const ItemDetailContainer = (props) =>{
+
     const [info, setInfo] = useState({});
+    
     const { id } = useParams();
 
     useEffect(() =>{

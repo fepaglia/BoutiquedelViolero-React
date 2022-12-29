@@ -1,5 +1,5 @@
 import Card from 'react-bootstrap/Card';
-import "./ItemDetail.css";
+import styles from "./ItemDetail.module.css";
 import Loading from '../utility/Loading';
 import ItemCount from './ItemCount';
 import { useState, useContext } from "react";
@@ -23,25 +23,26 @@ const ItemDetail = ({ data }) => {
         <>
         {
         data && data.pictureUrl ?
-            <Card className="ItemDetail">
-                <Card.Img className='image' src={data.pictureUrl} />
-                <div className="info">
-                    <Card.Title>{data.title}</Card.Title>
-                    
-                    <Card.Text className="texto">
-                        <hr/>
-                        <i>Precio: </i><span><strong>{data.price} u$s</strong></span> / 
-                        <span> Stock: {data.stock}</span>
-                        <hr/>
-                        {data.description}
-                    </Card.Text>
-                    {
-                        itemCount === 0
-                        ? <ItemCount stock={data.stock} initial={itemCount} onAdd={onAdd} />
-                        : <Button as={Link} to="/cart">CheckOut</Button>  
-                    }
-                </div>
-            </Card>
+            <div className={styles.container}>
+                <Card className={styles.ItemDetail}>
+                    <Card.Img className={styles.image} src={data.pictureUrl} />
+                    <div className={styles.info}>
+                        <Card.Title className={styles["card-title"]}>{data.title}</Card.Title>
+                        <Card.Text className={styles.texto}>
+                            <hr/>
+                            <i>Precio: </i><span><strong>{data.price} u$s</strong></span> / 
+                            <span> Stock: {data.stock}</span>
+                            <hr/>
+                            {data.description}
+                        </Card.Text>
+                        {
+                            itemCount === 0
+                            ? <ItemCount stock={data.stock} initial={itemCount} onAdd={onAdd} />
+                            : <Button className={styles.checkout} variant="success" as={Link} to="/cart">CheckOut</Button>
+                        }
+                    </div>
+                </Card>
+            </div>
             : <Loading />
         }           
         </>

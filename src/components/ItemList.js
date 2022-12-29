@@ -4,8 +4,8 @@ import Item from "./Item";
 const ItemList = ({ data }) => {
     return(
         <>{     //Ternario, mientras carga muestra el Spinner
-            data.length > 0 ?
-            data.map(product => 
+            data.length > 0 
+            ? data.map(product => 
             <Item 
             key={product.id}
             id= {product.id}
@@ -13,7 +13,8 @@ const ItemList = ({ data }) => {
             title={product.title}
             description={product.description}
             price={product.price}
-            />) : <Loading />
+            />) 
+            : <Loading />
         }
         </>
     )

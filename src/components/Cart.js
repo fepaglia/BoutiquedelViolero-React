@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 import Button from 'react-bootstrap/Button'
 import { collection, doc, setDoc, serverTimestamp, updateDoc, increment } from "firebase/firestore";
 import { db } from "../utility/firebaseConfig";
+import styles from "./Cart.module.css";
+import Swal from 'sweetalert2';
 
 const Cart = () =>{
-
     const ctx = useContext(CartContext);
-
     // Conexion de las ordenes de compras con la Base de datos:
     const createOrder = () =>{
     // Informacion Hardcodeada, simulando el input de un formulario:
@@ -17,17 +17,16 @@ const Cart = () =>{
                 name: "Federico",
                 email: "federicopaglia@gmail.com",
                 phone: "011422704896"
-            },
+                },
             date: serverTimestamp(),
             items: ctx.cartList.map(item =>({
                 id: item.idItem,
                 title:item.nameItem,
                 price:item.priceItem,
                 qty: item.qtyItem
-            })),
+                })),
             total: ctx.calcTotal()
-        }
-
+        };
 
         const createOrderInFirestore = async() =>{
             const newOrderRef = doc(collection(db,"orders"))
@@ -35,38 +34,46 @@ const Cart = () =>{
             return newOrderRef;
         };
         createOrderInFirestore()
-            .then(result => {alert("su orden esta en camino")
-        //Restamos el stock de los productos vendidos:
+            .then(result => {Swal.fire({
+                title: 'Listo!',
+                text: 'Estamos procesando tu pedido! \n Pronto tendras un nuevo e-mail, con la confirmacion de tu compra.',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+              })
+        //Restamos el stock de los productos vendidos, en la base de batos:
         ctx.cartList.forEach(async (item) => {
-            const itemRef = doc(db, "productos", item.idItem);
+            const itemRef = doc(db, "products", item.idItem);
             await updateDoc(itemRef, {
               stock: increment(-item.qtyItem)
             });
           });
         //Procesada la orden, vaciamos el carrito:
-            ctx.clear()
-    })
+        ctx.clear();
+        })
             .catch(err =>console.log(err));
 }
     return(
-        <>  
-            <div className="d-flex justify-content-center">
-                <div>
+        <section>  
+            <div className={styles.cabecera}>
                 <h2>Carrito</h2>
-                <button onClick={()=> {ctx.clear()}}>Limpiar todo</button> 
-
-                <Button as={Link} to={"/"}>Seguir Comprando</Button>
+                <div className={styles.botonera}>
+                    <Button  variant="danger" onClick={()=> {ctx.clear()}}>Limpiar todo</Button> 
+                    <Button as={Link} to={"/"}>Seguir Comprando</Button>
                 </div>
             </div>
-            <div >
+            <div className={styles.cartSelection} >
                 <div>
-                    
                     <ul>
                         {
                         ctx.cartList.length === 0
-                        ? <p>ESta Vacio</p>
+                        ? <p className={styles.carritoVacio}>El carrito esta vacio... </p>
                         : ctx.cartList.map( item => 
-                        <li key={item.idItem}>{item.nameItem} - unidades: {item.qtyItem} x u$s {item.priceItem} = Subtotal: {ctx.calcTotalPerItem(item.idItem)} <button onClick={() => ctx.removeItem(item.idItem)}>Remover</button></li>)
+                        <li className={styles.unidad} key={item.idItem}><img className={styles.imgThumbail} src={item.picItem} alt={item.nameItem} />
+                            <div> 
+                                {item.nameItem} <div>- unidades: <b>{item.qtyItem}</b> x u$s {item.priceItem} = Subtotal:<b> {ctx.calcTotalPerItem(item.idItem)} u$s</b></div>
+                                <Button className={styles.eliminarProducto} variant="danger" onClick={() => ctx.removeItem(item.idItem)}>Remover</Button>
+                            </div>
+                        </li>)
                         }
                     </ul>
                 </div>
@@ -75,26 +82,17 @@ const Cart = () =>{
                     ctx.cartList.length === 0
                     ? <p className="d-none">Esta Vacio</p>
                     : <aside>
-                            <table>
-                                <tr>Detalles de tu compra:</tr>
-                                <tr>
-                                    <td>Items:</td>
-                                    <td>{ctx.calcItemsQty()}</td>
-                                </tr>
-                                <tr>
-                                    <td>Monto Total:</td>
-                                    <td>{ctx.calcTotal()} u$s</td>
-                                </tr>
-
-                                <tr >
-                                    <td><Button onClick={() => {createOrder()}}>Realizar Pedido</Button></td>
-                                </tr>
-
-                            </table>
+                            <span className={styles.titulo}>Detalles de tu compra:</span>
+                            <ul>
+                                <li>Items: <b>{ctx.calcItemsQty()}</b></li>
+                                <li>Total a pagar: <b>{ctx.calcTotal()} u$s</b></li>
+                                <li>-Envio Gratis-</li>
+                            </ul>
+                            <Button className={styles.procesarPedido} variant="success" onClick={() => {createOrder()}}>Realizar Pedido</Button>
                         </aside>
                 }
             </div>
-        </>       
+        </section>       
     )
 };
 

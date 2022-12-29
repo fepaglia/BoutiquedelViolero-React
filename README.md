@@ -1,70 +1,22 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Proyecto Final React.js de CoderHouse
 
-## Available Scripts
+Este proyecto fue una primera aproximación al framework de React.JS.
+Su uso, a través de la modularización e implementación de Componentes, facilita el manejo de información, permitiendo trabajar cada parte de manera aislada. El código se transforma en pequeños bloques que una vez listos nos permiten unirlos como piezas de un rompecabezas para que trabajen entre si.
+ Este Ecommerce tiene como tematica la música. Hace tiempo que soy apasionado de ella, en particular de las guitarras. Las fotos fueron tomadas de un emprendimiento real que sigo en redes.
 
-In the project directory, you can run:
 
-### `npm start`
+## Herramientas Utilizadas
+En la creación de este Ecommerce ademas de React.JS, trabajamos con la plataforma Firebase y su herramienta FireStore para crear una pequeña base de datos. Así poder realizar llamados con la información de nuestros productos o simular el grabado de ordenes de compra y actualización de stock.
+Pusimos en práctica la creación de componentes y cómo se comportan entre sí, desarrollando su lógica individual y colectiva.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Front
+- React.JS: componentes funcionales y de clase, manejo de hooks, implementación de Eventos, uso de Context, y react-router-dom para mejorar la navegabilidad como también el uso de técnicas de rendering.
+- React Bootstrap: con esta librería conseguimos algunas piezas de código prearmadas, como los modelos de "cards", o "navbar".
+- CSS Modules: para darle estilos personalizados cuando lo necesitamos.
+- Sweet Alert 2: librería enfocada en alertas modales tipo pop-up.
+- Loaders: mientras se realiza el llamado a la información de la base de datos, nos muestra una animación hasta que se procesa.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Back 
+Vimos una previa de lo que sera el próximo curso enfocado 100% al backend.
+- Firebase:es una plataforma de desarrollo de apps. Ofrece una amplia variedad de productos. En esta ocasión, utilizamos Firestore. Su servicio de base de datos NoSQL, para poder trabajar con nuestro catálogo desde la nube.
